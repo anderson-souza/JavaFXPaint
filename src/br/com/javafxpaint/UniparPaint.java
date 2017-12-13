@@ -1,3 +1,4 @@
+package br.com.javafxpaint;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,11 +15,11 @@ public class UniparPaint extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        GroupPadrao root = GroupPadrao.getInstance();
-        Scene scene = new Scene(root, Screen.getPrimary().getVisualBounds().getWidth(), Screen.getPrimary().getVisualBounds().getHeight(), true, SceneAntialiasing.BALANCED);
+        GroupPadrao group = GroupPadrao.getInstance();
+        Scene scene = new Scene(group, Screen.getPrimary().getVisualBounds().getWidth(), Screen.getPrimary().getVisualBounds().getHeight(), true, SceneAntialiasing.BALANCED);
         Node node = FXMLLoader.load(getClass().getResource("BarraFerramentas.fxml"));
         BorderPanePadrao.getInstance().setTop(node);
-        root.getChildren().add(BorderPanePadrao.getInstance());
+        group.getChildren().add(BorderPanePadrao.getInstance());
 
         //Atributos da Cena
         stage.setTitle("Unipar Paint");

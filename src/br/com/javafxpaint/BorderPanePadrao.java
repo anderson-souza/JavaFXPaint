@@ -1,3 +1,4 @@
+package br.com.javafxpaint;
 
 import javafx.scene.layout.BorderPane;
 
@@ -14,5 +15,6 @@ public class BorderPanePadrao extends BorderPane {
 
     private BorderPanePadrao() {
         super();
+        setCache(true);
     }
 }

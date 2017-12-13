@@ -1,3 +1,4 @@
+package br.com.javafxpaint;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -16,10 +17,14 @@ public class MeuCanvasController implements Initializable {
 
     @FXML
     private Pane mainPane;
-    private final List<CanvasPadrao> canvas = new ArrayList<>();
+    private final List<CanvasPadrao> canvas;
 
     double atualX, atualY, velhoX, velhoY;
     MeusPinceis pinceis;
+
+    public MeuCanvasController() {
+        this.canvas = new ArrayList<>();
+    }
 
     /**
      * Initializes the controller class.

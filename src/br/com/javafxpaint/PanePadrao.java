@@ -1,3 +1,4 @@
+package br.com.javafxpaint;
 
 import java.util.ArrayList;
 import java.util.List;

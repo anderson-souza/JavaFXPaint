@@ -1,3 +1,4 @@
+package br.com.javafxpaint;
 
 import javafx.scene.Group;
 

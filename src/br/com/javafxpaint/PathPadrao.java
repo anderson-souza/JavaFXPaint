@@ -1,3 +1,4 @@
+package br.com.javafxpaint;
 
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
