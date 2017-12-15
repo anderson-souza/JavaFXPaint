@@ -30,8 +30,8 @@
                 <Button fx:id="btBorracha" layoutX="66.0" layoutY="13.0" mnemonicParsing="false" onAction="#btBorrachaPressed" text="Borracha" />
                 <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                     <children>
-                        <Label fx:id="labelEspessuraPincel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Espessura do Pincel:  3" />
-                        <Slider fx:id="sliderEspessuraPincel" blockIncrement="2.0" majorTickUnit="15.0" max="30.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" min="3.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" value="3.0" />
+                        <Label fx:id="labelEspessuraPincel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Espessura do Pincel: 5" wrapText="true" />
+                        <Slider fx:id="sliderEspessuraPincel" blockIncrement="2.0" majorTickUnit="15.0" max="30.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" value="5.0" />
                     </children>
                     <padding>
                         <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />

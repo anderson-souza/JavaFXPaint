@@ -15,6 +15,5 @@ public class GroupPadrao extends Group {
 
     private GroupPadrao() {
         super();
-        setCache(true);
     }
 }

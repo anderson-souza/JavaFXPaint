@@ -27,6 +27,7 @@ public class UniparPaint extends Application {
         stage.setScene(scene);
         //ScenicView.show(scene); //Visualizador de Cena, utilizado para Depurar a construção das cenas no JavaFX
         stage.show();
+        System.out.println(System.getProperties());
     }
 
     /**

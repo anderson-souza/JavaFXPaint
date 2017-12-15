@@ -14,7 +14,7 @@ public class MeusPinceis extends Observable {
         if (instancia == null) {
             instancia = new MeusPinceis();
             instancia.setPincelAtual(Pinceis.CANETA);
-            instancia.setEspessuraAtual(3);
+            instancia.setEspessuraAtual(5);
             instancia.setCorAtual(Color.BLACK);
         }
         return instancia;

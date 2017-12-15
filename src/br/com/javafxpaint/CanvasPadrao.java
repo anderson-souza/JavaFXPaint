@@ -3,10 +3,8 @@ package br.com.javafxpaint;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.scene.Cursor;
-import javafx.scene.ImageCursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeLineCap;
@@ -16,18 +14,17 @@ public class CanvasPadrao extends Canvas implements Observer {
 
     private GraphicsContext mainGc;
     private double atualX, atualY, velhoX, velhoY, espessuraPincel;
-    private int id;
+    private final int id;
     private MeusPinceis.Pinceis pincelAtual;
     MeusPinceis pinceis;
 
     public CanvasPadrao(double largura, double altura, int id) {
         super(largura, altura);
         this.id = id;
-        setCache(true);
-        mainGc = getGraphicsContext2D();
+        mainGc = getCanvasGraphicsContext();
         pinceis = MeusPinceis.getInstance();
         pinceis.addObserver(this);
-        InicializarDesenho();
+        InicializarDesenho(mainGc);
         setCursor(Cursor.CROSSHAIR);
 
         setOnMousePressed((MouseEvent event) -> { //Evento que será chamado quando o mouse for pressionado
@@ -39,14 +36,14 @@ public class CanvasPadrao extends Canvas implements Observer {
                 mainGc.beginPath();
                 switch (pincelAtual) {
                     case CANETA:
-                        Caneta(mainGc, event.getX(), event.getY(), event.getX(), event.getY());
+                        Caneta(mainGc, atualX, atualY, atualX, atualY);
                         break;
                     case BORRACHA:
                         Borracha(mainGc, atualX, atualY, espessuraPincel);
                         break;
                     case LAPIS:
                         //Lapis(mainGc, atualX, atualY, atualX, atualY);
-                        mainGc.moveTo(event.getX(), event.getY());
+                        mainGc.moveTo(atualX, atualY);
                         mainGc.stroke();
                         break;
                     default:
@@ -60,15 +57,15 @@ public class CanvasPadrao extends Canvas implements Observer {
                 atualX = event.getX();
                 atualY = event.getY();
                 switch (pincelAtual) {
+                    case BORRACHA:
+                        Borracha(mainGc, atualX, atualY, espessuraPincel);
+                        break;
                     case CANETA:
                         Caneta(mainGc, velhoX, velhoY, atualX, atualY);
                         break;
-                    case BORRACHA:
-                        Borracha(mainGc, event.getX(), event.getY(), espessuraPincel);
-                        break;
                     case LAPIS:
                         //Lapis(mainGc, velhoX, velhoY, atualX, atualY);
-                        mainGc.lineTo(event.getX(), event.getY());
+                        mainGc.lineTo(atualX, atualY);
                         mainGc.stroke();
                         break;
                     default:
@@ -82,7 +79,13 @@ public class CanvasPadrao extends Canvas implements Observer {
         });
     }
 
-    public void AlteraCursor() {
+    private GraphicsContext getCanvasGraphicsContext() {
+        return this.getGraphicsContext2D();
+    }
+
+    //TODO
+    //Alterar o ícone do cursor baseando-se no pincel selecionado
+    /*public void AlteraCursor() {
         switch (pincelAtual) {
             case CANETA:
                 Image imageCaneta = new Image("img/caneta.png");
@@ -98,22 +101,20 @@ public class CanvasPadrao extends Canvas implements Observer {
                 setCursor(Cursor.CROSSHAIR);
                 break;
         }
-    }
-
-    private void InicializarDesenho() { //Função que inicializa algumas preferencias para o desenho
+    }*/
+    private void InicializarDesenho(GraphicsContext gc) { //Função que inicializa algumas preferencias para o desenho
         pincelAtual = MeusPinceis.Pinceis.CANETA;
-        mainGc.setStroke(pinceis.getCorAtual());
-        mainGc.setLineWidth(pinceis.getEspessuraAtual());
+        gc.setStroke(pinceis.getCorAtual());
+        gc.setLineWidth(pinceis.getEspessuraAtual());
         espessuraPincel = pinceis.getEspessuraAtual();
-        mainGc.setLineCap(StrokeLineCap.ROUND); //Forma da Linha
-        mainGc.setLineJoin(StrokeLineJoin.ROUND); //Junção da Linha
-        mainGc.setFill(Color.BLACK); //Preenchimento das fórmas
+        gc.setLineCap(StrokeLineCap.ROUND); //Forma da Linha
+        gc.setLineJoin(StrokeLineJoin.ROUND); //Junção da Linha
+        gc.setFill(Color.BLACK); //Preenchimento das fórmas
         //AplicarEfeito(mainGc);
     }
 
     private void Borracha(GraphicsContext gc, double x, double y, double espessura) { //Função da Borracha
         gc.clearRect(x - (espessura / 2), y - (espessura / 2), espessura, espessura);
-        //gc.setStroke(gc.getC);
     }
 
     private void Caneta(GraphicsContext gc, double xInicio, double yInicio, double xFim, double yFim) { //Função da Caneta

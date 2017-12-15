@@ -15,6 +15,5 @@ public class BorderPanePadrao extends BorderPane {
 
     private BorderPanePadrao() {
         super();
-        setCache(true);
     }
 }

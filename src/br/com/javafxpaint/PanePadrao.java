@@ -5,9 +5,10 @@ import java.util.List;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 
-public class PanePadrao extends Pane {
+public final class PanePadrao extends Pane {
 
-    protected final List<CanvasPadrao> listaCamadas;
+    //protected final List<CanvasPadrao> listaCamadas;
+    protected final List<DrawCanvas> listaCamadas;
     protected static int count = 0; //Variavel para contar o número de Janelas criadas a fim de gerar um nome para a mesma
     int qtdCanvas = 1; //Varível para contar o número de canvas criado para este objeto a fim de gerar um nome para o mesmo
     private int camadaAtual = 0;
@@ -27,8 +28,16 @@ public class PanePadrao extends Pane {
         AdicionarCamadas();
     }
 
-    protected CanvasPadrao AdicionarCamadas() {
+    /*protected CanvasPadrao AdicionarCamadas() {
         CanvasPadrao canvas = new CanvasPadrao(Screen.getPrimary().getVisualBounds().getWidth(), Screen.getPrimary().getVisualBounds().getHeight(), qtdCanvas);
+        qtdCanvas++;
+        this.getChildren().add(canvas);
+        listaCamadas.add(canvas);
+        //System.out.println("PanePadrao.AdicionarCamadas(): " + listaCamadas);
+        return canvas;
+    }*/
+    protected DrawCanvas AdicionarCamadas() {
+        DrawCanvas canvas = new DrawCanvas(Screen.getPrimary().getVisualBounds().getWidth(), Screen.getPrimary().getVisualBounds().getHeight(), qtdCanvas);
         qtdCanvas++;
         this.getChildren().add(canvas);
         listaCamadas.add(canvas);
