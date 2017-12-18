@@ -1,5 +1,9 @@
-package br.com.javafxpaint;
+package br.com.javafxpaint.controllers;
 
+import br.com.javafxpaint.padroes.BorderPanePadrao;
+import br.com.javafxpaint.padroes.DrawCanvas;
+import br.com.javafxpaint.padroes.PanePadrao;
+import br.com.javafxpaint.pinceis.Borracha;
 import br.com.javafxpaint.pinceis.Caneta;
 import br.com.javafxpaint.pinceis.Lapis;
 import br.com.javafxpaint.pinceis.PincelController;
@@ -58,7 +62,6 @@ public class BarraFerramentasController implements Initializable {
     int qtdJanelas = 1;
     int janelaAtual = 0;
     int camadaAtual = 0;
-    MeusPinceis pinceis;
 
     PincelController pincelController;
 
@@ -67,9 +70,6 @@ public class BarraFerramentasController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) { //Inicializa algumas informações
-        //pinceis = MeusPinceis.getInstance();
-        //btColorPicker.setValue(pinceis.getCorAtual());
-
         pincelController = PincelController.getInstance();
         btColorPicker.setValue(pincelController.getCorAtual());
 
@@ -79,31 +79,27 @@ public class BarraFerramentasController implements Initializable {
 
         sliderEspessuraPincel.valueProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
             labelEspessuraPincel.setText("Espessura do Pincel: " + newValue.intValue());
-            //pinceis.setEspessuraAtual((double) newValue);
             pincelController.setTamanhoPincelAtual((double) newValue);
         });
     }
 
     @FXML
     private void btCanetaPressed(ActionEvent event) {
-        //pinceis.setPincelAtual(MeusPinceis.Pinceis.CANETA);
         pincelController.setPincelAtual(Caneta.getInstance());
     }
 
     @FXML
     private void btLapisPressed(ActionEvent event) {
-        //pinceis.setPincelAtual(MeusPinceis.Pinceis.LAPIS);
         pincelController.setPincelAtual(Lapis.getInstance());
     }
 
     @FXML
     private void btBorrachaPressed(ActionEvent event) {
-        pinceis.setPincelAtual(MeusPinceis.Pinceis.BORRACHA);
+        pincelController.setPincelAtual(Borracha.getInstance());
     }
 
     @FXML
     private void btColorPickerPressed(ActionEvent event) {
-        //pinceis.setCorAtual(btColorPicker.getValue());
         pincelController.setCorAtual(btColorPicker.getValue());
     }
 
@@ -134,13 +130,10 @@ public class BarraFerramentasController implements Initializable {
             } else {
                 layerComboBox.getSelectionModel().selectNext();
             }
-            //System.out.println("Camada a ser removida: " + indexRemove);
             layerComboBox.getItems().remove(indexRemove);
-
-            //ObservableList<CanvasPadrao> listaCamadas = FXCollections.observableArrayList(panesPadroes.get(janelaAtual).listaCamadas);
-            ObservableList<DrawCanvas> listaCamadas = FXCollections.observableArrayList(panesPadroes.get(janelaAtual).listaCamadas);
+            ObservableList<DrawCanvas> listaCamadas = FXCollections.observableArrayList(panesPadroes.get(janelaAtual).getListaCamadas());
             panesPadroes.get(janelaAtual).getChildren().remove(listaCamadas.get(indexRemove));
-            panesPadroes.get(janelaAtual).listaCamadas.remove(indexRemove);
+            panesPadroes.get(janelaAtual).getListaCamadas().remove(indexRemove);
         }
     }
 
@@ -148,10 +141,8 @@ public class BarraFerramentasController implements Initializable {
     private void layerComboBoxAction(ActionEvent event) { //Evento chamado quando uma camada é alterada
         if (!layerComboBox.getItems().isEmpty()) { //Verifica se o ComboBox não está vazio
             camadaAtual = layerComboBox.getSelectionModel().getSelectedIndex();
-            panesPadroes.get(janelaAtual).listaCamadas.get(camadaAtual).toFront();
+            panesPadroes.get(janelaAtual).getListaCamadas().get(camadaAtual).toFront();
             panesPadroes.get(janelaAtual).AlterarCamadaAtual(camadaAtual);
-            //System.out.println("Camada atual: " + camadaAtual);
-            //panesPadroes.get(janelaAtual).getChildren().get(camadaAtual).toFront(); //Corrigir
         }
     }
 
@@ -181,8 +172,7 @@ public class BarraFerramentasController implements Initializable {
         BorderPanePadrao.getInstance().setCenter(panesPadroes.get(janelaAtual));
 
         layerComboBox.getItems().clear();//Limpa todos os items do ComboBox de Camadas
-        //ObservableList<CanvasPadrao> listaCamadas = FXCollections.observableArrayList(panesPadroes.get(janelaAtual).listaCamadas);
-        ObservableList<DrawCanvas> listaCamadas = FXCollections.observableArrayList(panesPadroes.get(janelaAtual).listaCamadas);
+        ObservableList<DrawCanvas> listaCamadas = FXCollections.observableArrayList(panesPadroes.get(janelaAtual).getListaCamadas());
         listaCamadas.forEach((lista) -> { //Percorre todos os items dentro da lista de camadas da janela atual
             layerComboBox.getItems().add(lista.toString());//Adiciona cada item no ComboBox
         });
@@ -199,7 +189,6 @@ public class BarraFerramentasController implements Initializable {
     }
 
     private void AdicionaCamada() { //Função para criar uma nova camada de desenho
-        //CanvasPadrao canvas = panesPadroes.get(janelaAtual).AdicionarCamadas();
         DrawCanvas canvas = panesPadroes.get(janelaAtual).AdicionarCamadas();
         layerComboBox.getItems().add(canvas.toString());
         layerComboBox.getSelectionModel().selectLast();

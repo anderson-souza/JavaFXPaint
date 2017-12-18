@@ -1,4 +1,4 @@
-package br.com.javafxpaint;
+package br.com.javafxpaint.deprecated;
 
 import java.util.Observable;
 import javafx.scene.paint.Color;

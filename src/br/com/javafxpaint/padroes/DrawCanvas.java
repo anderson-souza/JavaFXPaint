@@ -1,4 +1,4 @@
-package br.com.javafxpaint;
+package br.com.javafxpaint.padroes;
 
 import br.com.javafxpaint.pinceis.PincelController;
 import java.util.Observable;
@@ -23,6 +23,7 @@ public class DrawCanvas extends Canvas implements Observer {
         PincelController pincelController = PincelController.getInstance();
         pincelController.addObserver(getInstance());
 
+        //Configurações iniciais dos desenhos
         graphicsContext.setLineWidth(pincelController.getTamanhoPincelAtual());
         graphicsContext.setStroke(pincelController.getCorAtual());
         graphicsContext.setLineCap(StrokeLineCap.ROUND);

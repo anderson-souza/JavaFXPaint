@@ -1,5 +1,7 @@
-package br.com.javafxpaint;
+package br.com.javafxpaint.main;
 
+import br.com.javafxpaint.padroes.BorderPanePadrao;
+import br.com.javafxpaint.padroes.GroupPadrao;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,14 +12,12 @@ import javafx.stage.Stage;
 
 public class UniparPaint extends Application {
 
-    public PanePadrao mainPane;
-
     @Override
     public void start(Stage stage) throws Exception {
 
         GroupPadrao group = GroupPadrao.getInstance();
         Scene scene = new Scene(group, Screen.getPrimary().getVisualBounds().getWidth(), Screen.getPrimary().getVisualBounds().getHeight(), true, SceneAntialiasing.BALANCED);
-        Node node = FXMLLoader.load(getClass().getResource("BarraFerramentas.fxml"));
+        Node node = FXMLLoader.load(getClass().getResource("/br/com/javafxpaint/fxml/BarraFerramentas.fxml"));
         BorderPanePadrao.getInstance().setTop(node);
         group.getChildren().add(BorderPanePadrao.getInstance());
 
@@ -27,7 +27,6 @@ public class UniparPaint extends Application {
         stage.setScene(scene);
         //ScenicView.show(scene); //Visualizador de Cena, utilizado para Depurar a construção das cenas no JavaFX
         stage.show();
-        System.out.println(System.getProperties());
     }
 
     /**

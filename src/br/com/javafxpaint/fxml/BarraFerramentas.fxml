@@ -13,7 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<TitledPane fx:id="mainTitledPane" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="Barra de Ferramentas" wrapText="true" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.javafxpaint.BarraFerramentasController">
+<TitledPane fx:id="mainTitledPane" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="Barra de Ferramentas" wrapText="true" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.javafxpaint.controllers.BarraFerramentasController">
     <content>
         <ToolBar>
             <items>
@@ -21,20 +21,20 @@
                     <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../img/caneta.png" />
+                                <Image url="@../../../../img/caneta.png" />
                             </image>
                         </ImageView>
                     </graphic>
                 </Button>
                 <Button fx:id="btLapis" layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#btLapisPressed" text="Lápis" />
                 <Button fx:id="btBorracha" layoutX="66.0" layoutY="13.0" mnemonicParsing="false" onAction="#btBorrachaPressed" text="Borracha" />
-                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                     <children>
-                        <Label fx:id="labelEspessuraPincel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Espessura do Pincel: 5" wrapText="true" />
-                        <Slider fx:id="sliderEspessuraPincel" blockIncrement="2.0" majorTickUnit="15.0" max="30.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" value="5.0" />
+                        <Label fx:id="labelEspessuraPincel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Espessura do Pincel: 5" textAlignment="CENTER" wrapText="true" />
+                        <Slider fx:id="sliderEspessuraPincel" blockIncrement="1.0" majorTickUnit="10.0" max="50.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" value="5.0" />
                     </children>
                     <padding>
-                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </padding>
                 </VBox>
                 <ColorPicker fx:id="btColorPicker" onAction="#btColorPickerPressed" />

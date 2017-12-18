@@ -1,4 +1,4 @@
-package br.com.javafxpaint;
+package br.com.javafxpaint.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;

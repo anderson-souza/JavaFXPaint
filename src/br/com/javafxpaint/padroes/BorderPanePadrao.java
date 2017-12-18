@@ -1,4 +1,4 @@
-package br.com.javafxpaint;
+package br.com.javafxpaint.padroes;
 
 import javafx.scene.layout.BorderPane;
 
