@@ -82,13 +82,4 @@ public class DrawCanvas extends Canvas implements Observer {
             graphicsContext.setLineWidth(espessuraPincel);
         }
     }
-
-    /*private static final int EVENT_TYPE_DRAG = 1;
-    private static final int EVENT_TYPE_HOVER = 2;
-    private static final int EVENT_TYPE_DOWN = 3;
-    private static final int EVENT_TYPE_UP = 4;
-    private static final int EVENT_TYPE_BUTTON_DOWN = 5;
-    private static final int EVENT_TYPE_BUTTON_UP = 6;
-    private static final int EVENT_TYPE_IN_RANGE = 7;
-    private static final int EVENT_TYPE_OUT_OF_RANGE = 8;*/
 }

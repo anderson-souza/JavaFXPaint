@@ -18,7 +18,7 @@ public class PincelController extends Observable {
     public static synchronized PincelController getInstance() {
         if (instancia == null) {
             instancia = new PincelController();
-            instancia.configurarInicializacao();
+            instancia.setPincelAtual(Caneta.getInstance());
         }
         return instancia;
     }
@@ -28,6 +28,7 @@ public class PincelController extends Observable {
     private double tamanhoPincelAtual;
 
     private PincelController() {
+
     }
 
     public synchronized Pincel getPincelAtual() {
@@ -43,32 +44,26 @@ public class PincelController extends Observable {
     }
 
     public synchronized Color getCorAtual() {
-        return corAtual;
+        return pincelAtual.corAtual;
     }
 
     public void setCorAtual(Color corAtual) {
         synchronized (this) {
-            this.corAtual = corAtual;
+            this.pincelAtual.corAtual = corAtual;
         }
         setChanged();
         notifyObservers();
     }
 
     public synchronized double getTamanhoPincelAtual() {
-        return tamanhoPincelAtual;
+        return pincelAtual.tamanhoPincelAtual;
     }
 
     public void setTamanhoPincelAtual(double tamanhoPincelAtual) {
         synchronized (this) {
-            this.tamanhoPincelAtual = tamanhoPincelAtual;
+            this.pincelAtual.tamanhoPincelAtual = tamanhoPincelAtual;
         }
         setChanged();
         notifyObservers();
-    }
-
-    private void configurarInicializacao() {
-        setPincelAtual(Caneta.getInstance());
-        setCorAtual(Color.BLACK);
-        setTamanhoPincelAtual(1);
     }
 }

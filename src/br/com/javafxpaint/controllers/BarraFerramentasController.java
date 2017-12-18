@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -27,7 +29,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
 
-public class BarraFerramentasController implements Initializable {
+public class BarraFerramentasController implements Initializable, Observer {
 
     @FXML
     private Button btCaneta;
@@ -69,12 +71,12 @@ public class BarraFerramentasController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) { //Inicializa algumas informações
         pincelController = PincelController.getInstance();
+        pincelController.addObserver(this);
         btColorPicker.setValue(pincelController.getCorAtual());
 
         AdicionaJanela(); //Adiciona a primeira Janela a aplicação
         layerComboBox.getItems().add("Camada " + (qtdCamadas++));
         layerComboBox.getSelectionModel().selectFirst();
-
         sliderEspessuraPincel.valueProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
             labelEspessuraPincel.setText("Espessura do Pincel: " + newValue.intValue());
             pincelController.setTamanhoPincelAtual((double) newValue);
@@ -191,5 +193,13 @@ public class BarraFerramentasController implements Initializable {
         DrawCanvas canvas = panesPadroes.get(janelaAtual).AdicionarCamadas();
         layerComboBox.getItems().add(canvas.toString());
         layerComboBox.getSelectionModel().selectLast();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (o instanceof PincelController) {
+            sliderEspessuraPincel.setValue(pincelController.getTamanhoPincelAtual());
+            btColorPicker.setValue(pincelController.getCorAtual());
+        }
     }
 }
