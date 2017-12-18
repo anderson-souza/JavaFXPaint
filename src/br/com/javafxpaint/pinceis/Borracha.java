@@ -18,7 +18,8 @@ public class Borracha implements Pincel {
 
     @Override
     public void desenhar(GraphicsContext gc, double x1, double y1, double x2, double y2) {
-        double espessura = PincelController.getInstance().getTamanhoPincelAtual();
+        final double espessura;
+        espessura = PincelController.getInstance().getTamanhoPincelAtual();
         gc.clearRect(x2 - (espessura / 2), y2 - (espessura / 2), espessura, espessura);
     }
 }

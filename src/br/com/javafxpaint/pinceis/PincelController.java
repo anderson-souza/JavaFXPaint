@@ -69,6 +69,6 @@ public class PincelController extends Observable {
     private void configurarInicializacao() {
         setPincelAtual(Caneta.getInstance());
         setCorAtual(Color.BLACK);
-        setTamanhoPincelAtual(5);
+        setTamanhoPincelAtual(1);
     }
 }

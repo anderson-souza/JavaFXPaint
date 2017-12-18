@@ -58,10 +58,8 @@ public class BarraFerramentasController implements Initializable {
     @FXML
     private ComboBox windowsComboBox;
 
-    int qtdCamadas = 1;
-    int qtdJanelas = 1;
-    int janelaAtual = 0;
-    int camadaAtual = 0;
+    int qtdCamadas = 1, qtdJanelas = 1;
+    int janelaAtual, camadaAtual;
 
     PincelController pincelController;
 
@@ -105,7 +103,8 @@ public class BarraFerramentasController implements Initializable {
 
     @FXML
     private void btTelaCheiaPressed(ActionEvent event) {
-        Stage stage = (Stage) btTelaCheia.getScene().getWindow();
+        final Stage stage;
+        stage = (Stage) btTelaCheia.getScene().getWindow();
 
         if (stage.isFullScreen()) {
             stage.setFullScreen(false);

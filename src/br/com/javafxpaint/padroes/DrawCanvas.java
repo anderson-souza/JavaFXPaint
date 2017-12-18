@@ -20,7 +20,8 @@ public class DrawCanvas extends Canvas implements Observer {
         super(largura, altura);
         this.id = id;
         graphicsContext = getCanvasGraphicsContext();
-        PincelController pincelController = PincelController.getInstance();
+        final PincelController pincelController;
+        pincelController = PincelController.getInstance();
         pincelController.addObserver(getInstance());
 
         //Configurações iniciais dos desenhos
@@ -74,10 +75,20 @@ public class DrawCanvas extends Canvas implements Observer {
     @Override
     public void update(Observable observable, Object arg) {
         if (observable instanceof PincelController) {
-            Color novaCor = ((PincelController) observable).getCorAtual();
+            final Color novaCor;
+            novaCor = ((PincelController) observable).getCorAtual();
             graphicsContext.setStroke(novaCor);
             espessuraPincel = ((PincelController) observable).getTamanhoPincelAtual();
             graphicsContext.setLineWidth(espessuraPincel);
         }
     }
+
+    /*private static final int EVENT_TYPE_DRAG = 1;
+    private static final int EVENT_TYPE_HOVER = 2;
+    private static final int EVENT_TYPE_DOWN = 3;
+    private static final int EVENT_TYPE_UP = 4;
+    private static final int EVENT_TYPE_BUTTON_DOWN = 5;
+    private static final int EVENT_TYPE_BUTTON_UP = 6;
+    private static final int EVENT_TYPE_IN_RANGE = 7;
+    private static final int EVENT_TYPE_OUT_OF_RANGE = 8;*/
 }
