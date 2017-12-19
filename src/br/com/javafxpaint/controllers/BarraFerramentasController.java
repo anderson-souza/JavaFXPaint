@@ -9,13 +9,10 @@ import br.com.javafxpaint.pinceis.Lapis;
 import br.com.javafxpaint.pinceis.PincelController;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,7 +22,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
 
@@ -39,8 +37,6 @@ public class BarraFerramentasController implements Initializable, Observer {
     private Button btBorracha;
     @FXML
     private ColorPicker btColorPicker;
-    @FXML
-    private Slider sliderEspessuraPincel;
     @FXML
     private Label labelEspessuraPincel;
     @FXML
@@ -56,17 +52,16 @@ public class BarraFerramentasController implements Initializable, Observer {
     @FXML
     private Button btJanelaRemove;
     @FXML
-    private ComboBox layerComboBox;
+    private ComboBox<String> layerComboBox;
     @FXML
-    private ComboBox windowsComboBox;
+    private ComboBox<String> windowsComboBox;
+    @FXML
+    private Spinner<Double> espessuraSpinner;
 
     int qtdCamadas = 1, qtdJanelas = 1;
     int janelaAtual, camadaAtual;
-
     PincelController pincelController;
-
     private final List<PanePadrao> panesPadroes = new ArrayList<>();
-    Map<String, Integer> hashmapCamadas = new HashMap<>(); //HashMap utilizado para manter registro do nome e posição do Layer no Pane
 
     @Override
     public void initialize(URL url, ResourceBundle rb) { //Inicializa algumas informações
@@ -77,10 +72,15 @@ public class BarraFerramentasController implements Initializable, Observer {
         AdicionaJanela(); //Adiciona a primeira Janela a aplicação
         layerComboBox.getItems().add("Camada " + (qtdCamadas++));
         layerComboBox.getSelectionModel().selectFirst();
-        sliderEspessuraPincel.valueProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
-            labelEspessuraPincel.setText("Espessura do Pincel: " + newValue.intValue());
-            pincelController.setTamanhoPincelAtual((double) newValue);
+
+        //Inicializa algumas informações sobre o Spinner
+        SpinnerValueFactory<Double> valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 50, 1, 1);
+        espessuraSpinner.setValueFactory(valueFactory);
+        espessuraSpinner.setEditable(true);
+        espessuraSpinner.valueProperty().addListener((observable, oldValue, newValue) -> {
+            pincelController.setTamanhoPincelAtual(newValue);
         });
+
     }
 
     @FXML
@@ -174,7 +174,7 @@ public class BarraFerramentasController implements Initializable, Observer {
 
         layerComboBox.getItems().clear();//Limpa todos os items do ComboBox de Camadas
         ObservableList<DrawCanvas> listaCamadas = FXCollections.observableArrayList(panesPadroes.get(janelaAtual).getListaCamadas());
-        listaCamadas.forEach((lista) -> { //Percorre todos os items dentro da lista de camadas da janela atual
+        listaCamadas.forEach((DrawCanvas lista) -> { //Percorre todos os items dentro da lista de camadas da janela atual
             layerComboBox.getItems().add(lista.toString());//Adiciona cada item no ComboBox
         });
         layerComboBox.getSelectionModel().select(panesPadroes.get(janelaAtual).getCamadaAtual());
@@ -198,7 +198,7 @@ public class BarraFerramentasController implements Initializable, Observer {
     @Override
     public void update(Observable o, Object arg) {
         if (o instanceof PincelController) {
-            sliderEspessuraPincel.setValue(pincelController.getTamanhoPincelAtual());
+            espessuraSpinner.getValueFactory().setValue(pincelController.getTamanhoPincelAtual());
             btColorPicker.setValue(pincelController.getCorAtual());
         }
     }

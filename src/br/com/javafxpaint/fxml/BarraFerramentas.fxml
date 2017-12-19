@@ -6,9 +6,10 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
@@ -28,14 +29,20 @@
                 </Button>
                 <Button fx:id="btLapis" layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#btLapisPressed" text="Lápis" />
                 <Button fx:id="btBorracha" layoutX="66.0" layoutY="13.0" mnemonicParsing="false" onAction="#btBorrachaPressed" text="Borracha" />
-                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                     <children>
-                        <Label fx:id="labelEspessuraPincel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Espessura do Pincel: 1" textAlignment="CENTER" wrapText="true" />
-                        <Slider fx:id="sliderEspessuraPincel" blockIncrement="1.0" majorTickUnit="10.0" max="50.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" value="1.0" />
+                        <Label fx:id="labelEspessuraPincel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Tamanho do Pincel" textAlignment="CENTER" wrapText="true" />
+                  <Spinner fx:id="espessuraSpinner">
+                     <tooltip>
+                        <Tooltip text="Mínimo: 1 - Máximo: 50" textAlignment="CENTER" wrapText="true" />
+                     </tooltip>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></Spinner>
                     </children>
-                    <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </padding>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
                 </VBox>
                 <ColorPicker fx:id="btColorPicker" onAction="#btColorPickerPressed" />
                 <Button fx:id="btTelaCheia" mnemonicParsing="false" onAction="#btTelaCheiaPressed" text="Tela Cheia" />

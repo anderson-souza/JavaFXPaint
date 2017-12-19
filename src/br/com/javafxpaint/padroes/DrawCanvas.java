@@ -3,6 +3,7 @@ package br.com.javafxpaint.padroes;
 import br.com.javafxpaint.pinceis.PincelController;
 import java.util.Observable;
 import java.util.Observer;
+import javafx.scene.ImageCursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
@@ -23,6 +24,7 @@ public class DrawCanvas extends Canvas implements Observer {
         final PincelController pincelController;
         pincelController = PincelController.getInstance();
         pincelController.addObserver(getInstance());
+        setCursor(new ImageCursor(PincelController.getInstance().getCursor(), 0, 512));
 
         //Configurações iniciais dos desenhos
         graphicsContext.setLineWidth(pincelController.getTamanhoPincelAtual());
@@ -80,6 +82,7 @@ public class DrawCanvas extends Canvas implements Observer {
             graphicsContext.setStroke(novaCor);
             espessuraPincel = ((PincelController) observable).getTamanhoPincelAtual();
             graphicsContext.setLineWidth(espessuraPincel);
+            setCursor(new ImageCursor(PincelController.getInstance().getCursor(), 0, 512));
         }
     }
 }

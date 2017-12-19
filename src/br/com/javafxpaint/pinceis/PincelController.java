@@ -1,6 +1,7 @@
 package br.com.javafxpaint.pinceis;
 
 import java.util.Observable;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 /**
@@ -22,13 +23,9 @@ public class PincelController extends Observable {
         }
         return instancia;
     }
-
     private Pincel pincelAtual;
-    private Color corAtual;
-    private double tamanhoPincelAtual;
 
     private PincelController() {
-
     }
 
     public synchronized Pincel getPincelAtual() {
@@ -62,6 +59,18 @@ public class PincelController extends Observable {
     public void setTamanhoPincelAtual(double tamanhoPincelAtual) {
         synchronized (this) {
             this.pincelAtual.tamanhoPincelAtual = tamanhoPincelAtual;
+        }
+        setChanged();
+        notifyObservers();
+    }
+
+    public synchronized Image getCursor() {
+        return pincelAtual.cursor;
+    }
+
+    public void setCursor(Image cursor) {
+        synchronized (this) {
+            this.pincelAtual.cursor = cursor;
         }
         setChanged();
         notifyObservers();

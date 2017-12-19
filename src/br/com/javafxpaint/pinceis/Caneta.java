@@ -1,6 +1,7 @@
 package br.com.javafxpaint.pinceis;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 /**
@@ -23,22 +24,6 @@ public class Caneta extends Pincel {
         inicializarPincel();
     }
 
-    public Color getCorAtual() {
-        return corAtual;
-    }
-
-    public void setCorAtual(Color corAtual) {
-        this.corAtual = corAtual;
-    }
-
-    public double getTamanhoPincelAtual() {
-        return tamanhoPincelAtual;
-    }
-
-    public void setTamanhoPincelAtual(double tamanhoPincelAtual) {
-        this.tamanhoPincelAtual = tamanhoPincelAtual;
-    }
-
     @Override
     public void desenhar(GraphicsContext gc, double x1, double y1, double x2, double y2) {
         gc.strokeLine(x1, y1, x2, y2);
@@ -46,7 +31,8 @@ public class Caneta extends Pincel {
 
     @Override
     public final void inicializarPincel() {
-        setCorAtual(Color.BLACK);
-        setTamanhoPincelAtual(1);
+        corAtual = Color.BLACK;
+        tamanhoPincelAtual = 1;
+        cursor = new Image("img/caneta.png");
     }
 }
