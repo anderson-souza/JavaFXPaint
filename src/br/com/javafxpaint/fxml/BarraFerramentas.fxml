@@ -12,23 +12,47 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<TitledPane fx:id="mainTitledPane" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="Barra de Ferramentas" wrapText="true" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.javafxpaint.controllers.BarraFerramentasController">
+<TitledPane fx:id="mainTitledPane" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="Unipar EAD Paint" wrapText="true" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.javafxpaint.controllers.BarraFerramentasController">
     <content>
         <ToolBar>
             <items>
-                <Button fx:id="btCaneta" mnemonicParsing="false" onAction="#btCanetaPressed" text="Caneta">
-                    <graphic>
-                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../../../../img/caneta.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button fx:id="btLapis" layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#btLapisPressed" text="Lápis" />
-                <Button fx:id="btBorracha" layoutX="66.0" layoutY="13.0" mnemonicParsing="false" onAction="#btBorrachaPressed" text="Borracha" />
+            <VBox>
+               <children>
+                  <Label text="Pinceis" />
+                  <HBox spacing="5.0">
+                     <children>
+                            <Button fx:id="btCaneta" mnemonicParsing="false" onAction="#btCanetaPressed" text="Caneta">
+                                <graphic>
+                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../../../../img/caneta.png" />
+                                        </image>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Button fx:id="btLapis" mnemonicParsing="false" onAction="#btLapisPressed" text="Lápis">
+                           <graphic>
+                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../img/lapis.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                            <Button fx:id="btBorracha" mnemonicParsing="false" onAction="#btBorrachaPressed" text="Borracha">
+                           <graphic>
+                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../img/borracha.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
                 <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                     <children>
                         <Label fx:id="labelEspessuraPincel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Tamanho do Pincel" textAlignment="CENTER" wrapText="true" />
@@ -40,20 +64,51 @@
                         <Insets />
                      </VBox.margin></Spinner>
                     </children>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
                 </VBox>
-                <ColorPicker fx:id="btColorPicker" onAction="#btColorPickerPressed" />
-                <Button fx:id="btTelaCheia" mnemonicParsing="false" onAction="#btTelaCheiaPressed" text="Tela Cheia" />
+            <VBox>
+               <children>
+                  <Label text="Cor do Pincel" />
+                      <ColorPicker fx:id="btColorPicker" onAction="#btColorPickerPressed" />
+               </children>
+            </VBox>
                 <Separator orientation="VERTICAL" />
-                <ComboBox fx:id="layerComboBox" onAction="#layerComboBoxAction" promptText="Camadas" />
-                <Button fx:id="btCamadaAdd" mnemonicParsing="false" onAction="#btCamadaAddAction" text="+" />
-                <Button fx:id="btCamadaRemove" layoutX="697.0" layoutY="21.0" mnemonicParsing="false" onAction="#btCamadaRemoveAction" text="-" />
+            <VBox>
+               <children>
+                  <Label text="Camadas" />
+                  <HBox spacing="5.0">
+                     <children>
+                            <ComboBox fx:id="layerComboBox" onAction="#layerComboBoxAction" promptText="Camadas" />
+                            <Button fx:id="btCamadaAdd" mnemonicParsing="false" onAction="#btCamadaAddAction" text="+" />
+                            <Button fx:id="btCamadaRemove" mnemonicParsing="false" onAction="#btCamadaRemoveAction" text="-" />
+                        <Button fx:id="btLimparCamada" mnemonicParsing="false" onAction="#btLimparCamadaAction" text="Limpar" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
                 <Separator layoutX="588.0" layoutY="10.0" orientation="VERTICAL" />
-                <ComboBox fx:id="windowsComboBox" layoutX="598.0" layoutY="21.0" onAction="#windowsComboBoxAction" promptText="Janela 1" />
-                <Button fx:id="btJanelaAdd" layoutX="697.0" layoutY="21.0" mnemonicParsing="false" onAction="#btJanelaAddAction" text="+" />
-                <Button fx:id="btJanelaRemove" layoutX="726.0" layoutY="21.0" mnemonicParsing="false" onAction="#btJanelaRemoveAction" text="-" />
+            <VBox>
+               <children>
+                  <Label text="Janelas" />
+                  <HBox spacing="5.0">
+                     <children>
+                            <ComboBox fx:id="windowsComboBox" onAction="#windowsComboBoxAction" promptText="Janela 1" />
+                            <Button fx:id="btJanelaAdd" mnemonicParsing="false" onAction="#btJanelaAddAction" text="+" />
+                            <Button fx:id="btJanelaRemove" mnemonicParsing="false" onAction="#btJanelaRemoveAction" text="-" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Separator layoutX="718.0" layoutY="10.0" orientation="VERTICAL" />
+            <VBox>
+               <children>
+                  <Label text="Opções" />
+                  <HBox spacing="5.0">
+                     <children>
+                            <Button fx:id="btTelaCheia" mnemonicParsing="false" onAction="#btTelaCheiaPressed" text="Tela Cheia" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
             </items>
         </ToolBar>
     </content>

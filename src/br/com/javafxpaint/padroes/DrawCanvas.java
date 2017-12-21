@@ -62,13 +62,10 @@ public class DrawCanvas extends Canvas implements Observer {
         return this;
     }
 
-    private GraphicsContext getCanvasGraphicsContext() {
+    protected GraphicsContext getCanvasGraphicsContext() {
         return this.getGraphicsContext2D();
     }
 
-    //TODO
-    //Alterar cursor
-    //-----
     @Override
     public String toString() {
         return "Camada " + id;

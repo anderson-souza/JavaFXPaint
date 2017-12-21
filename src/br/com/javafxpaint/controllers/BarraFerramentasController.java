@@ -25,6 +25,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TitledPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class BarraFerramentasController implements Initializable, Observer {
@@ -57,6 +58,8 @@ public class BarraFerramentasController implements Initializable, Observer {
     private ComboBox<String> windowsComboBox;
     @FXML
     private Spinner<Double> espessuraSpinner;
+    @FXML
+    private Button btLimparCamada;
 
     int qtdCamadas = 1, qtdJanelas = 1;
     int janelaAtual, camadaAtual;
@@ -180,6 +183,13 @@ public class BarraFerramentasController implements Initializable, Observer {
         layerComboBox.getSelectionModel().select(panesPadroes.get(janelaAtual).getCamadaAtual());
     }
 
+    @FXML
+    private void btLimparCamadaAction(ActionEvent event) {
+        final DrawCanvas canvasClear;
+        canvasClear = panesPadroes.get(janelaAtual).getListaCamadas().get(camadaAtual);
+        canvasClear.getGraphicsContext2D().clearRect(0, 0, Screen.getPrimary().getVisualBounds().getWidth(), Screen.getPrimary().getVisualBounds().getHeight());
+    }
+
     private void AdicionaJanela() { //Função para criar uma nova janela de desenho
         PanePadrao panePadrao = new PanePadrao(); //Cria um Painel Padrão
         BorderPanePadrao.getInstance().setCenter(panePadrao); //Adiciona este Painel no Centro do Layout
@@ -202,4 +212,5 @@ public class BarraFerramentasController implements Initializable, Observer {
             btColorPicker.setValue(pincelController.getCorAtual());
         }
     }
+
 }
