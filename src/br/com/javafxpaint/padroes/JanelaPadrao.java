@@ -5,14 +5,20 @@ import java.util.List;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 
-public final class PanePadrao extends Pane {
+/**
+ * JanelaPadrao é uma classe que extende de Pane e é utilizada para manter as
+ * camadas(Canvas) da aplicação.
+ *
+ * @author EAD-UNIPAR
+ */
+public final class JanelaPadrao extends Pane {
 
-    protected static int count = 0; //Variavel para contar o número de Janelas criadas a fim de gerar um nome para a mesma
+    protected static int count; //Variavel para contar o número de Janelas criadas a fim de gerar um nome para a mesma
     private List<DrawCanvas> listaCamadas;
     int qtdCanvas = 1; //Varível para contar o número de canvas criado para este objeto a fim de gerar um nome para o mesmo
-    private int camadaAtual = 0;
+    private int camadaAtual;
 
-    public PanePadrao() {
+    public JanelaPadrao() {
         super();
         listaCamadas = new ArrayList<>();
         count++;
@@ -23,7 +29,7 @@ public final class PanePadrao extends Pane {
         return camadaAtual;
     }
 
-    private void setCamadaAtual(int camadaAtual) {
+    private void setCamadaAtual(final int camadaAtual) {
         this.camadaAtual = camadaAtual;
     }
 
@@ -31,19 +37,19 @@ public final class PanePadrao extends Pane {
         return listaCamadas;
     }
 
-    public void setListaCamadas(List<DrawCanvas> listaCamadas) {
+    public void setListaCamadas(final List<DrawCanvas> listaCamadas) {
         this.listaCamadas = listaCamadas;
     }
 
     public DrawCanvas AdicionarCamadas() {
-        DrawCanvas canvas = new DrawCanvas(Screen.getPrimary().getVisualBounds().getWidth(), Screen.getPrimary().getVisualBounds().getHeight(), qtdCanvas);
+        final DrawCanvas canvas = new DrawCanvas(Screen.getPrimary().getVisualBounds().getWidth(), Screen.getPrimary().getVisualBounds().getHeight(), qtdCanvas);
         qtdCanvas++;
         this.getChildren().add(canvas);
         listaCamadas.add(canvas);
         return canvas;
     }
 
-    public void AlterarCamadaAtual(int index) {
+    public void AlterarCamadaAtual(final int index) {
         setCamadaAtual(index);
     }
 

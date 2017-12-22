@@ -13,24 +13,6 @@ import javafx.stage.Stage;
 
 public class UniparPaint extends Application {
 
-    @Override
-    public void start(Stage stage) throws Exception {
-
-        final GroupPadrao group = GroupPadrao.getInstance();
-        final Scene scene = new Scene(group, Screen.getPrimary().getVisualBounds().getWidth(), Screen.getPrimary().getVisualBounds().getHeight(), true, SceneAntialiasing.BALANCED);
-        final Node node = FXMLLoader.load(getClass().getResource("/br/com/javafxpaint/fxml/BarraFerramentas.fxml"));
-        BorderPanePadrao.getInstance().setTop(node);
-        group.getChildren().add(BorderPanePadrao.getInstance());
-
-        //Atributos da Cena
-        stage.setTitle("Unipar EAD Paint");
-        stage.setMaximized(true);
-        stage.setScene(scene);
-        stage.getIcons().add(new Image("img/logo_mini_unipar_icon.png"));
-        //ScenicView.show(scene); //Visualizador de Cena, utilizado para Depurar a construção das cenas no JavaFX
-        stage.show();
-    }
-
     /**
      * @param args the command line arguments
      */
@@ -38,4 +20,29 @@ public class UniparPaint extends Application {
         launch(args);
     }
 
+    Scene scene;
+    Node node;
+
+    @Override
+    public void start(Stage stage) throws Exception {
+
+        final GroupPadrao group = GroupPadrao.getInstance();
+        scene = new Scene(group, Screen.getPrimary().getVisualBounds().getWidth(), Screen.getPrimary().getVisualBounds().getHeight(), true, SceneAntialiasing.BALANCED);
+        group.getChildren().add(BorderPanePadrao.getInstance());
+        node = FXMLLoader.load(getClass().getResource("/br/com/javafxpaint/fxml/BarraFerramentas.fxml"));
+        //Atributos da Cena
+        BorderPanePadrao.getInstance().setTop(node);
+        stage.setTitle("Unipar EAD Paint");
+        stage.setMaximized(true);
+        stage.setScene(scene);
+        stage.getIcons().add(new Image("img/logo_mini_unipar_icon.png"));
+        //ScenicView.show(scene); //Visualizador de Cena, utilizado para Depurar a construção das cenas no JavaFX
+        stage.show();
+
+    }
+
+    @Override
+    public void stop() {
+        System.exit(0);
+    }
 }
