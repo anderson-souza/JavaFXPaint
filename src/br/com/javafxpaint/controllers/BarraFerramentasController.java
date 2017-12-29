@@ -137,7 +137,7 @@ public class BarraFerramentasController implements Initializable, Observer {
     }
 
     @FXML
-    private void layerComboBoxAction(ActionEvent event) { //Evento chamado quando uma camada é alterada
+    private void camadaComboBoxAction(ActionEvent event) { //Evento chamado quando uma camada é alterada
         if (!layerComboBox.getItems().isEmpty()) { //Verifica se o ComboBox não está vazio
             camadaAtual = layerComboBox.getSelectionModel().getSelectedIndex();
             panesPadroes.get(janelaAtual).getListaCamadas().get(camadaAtual).toFront();

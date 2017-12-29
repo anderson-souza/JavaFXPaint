@@ -62,7 +62,7 @@
                         <Label text="Camadas" />
                         <HBox spacing="5.0">
                             <children>
-                                <ComboBox fx:id="layerComboBox" onAction="#layerComboBoxAction" promptText="Camadas" />
+                                <ComboBox fx:id="layerComboBox" onAction="#camadaComboBoxAction" promptText="Camadas" />
                                 <Button fx:id="btCamadaAdd" mnemonicParsing="false" onAction="#btCamadaAddAction" text="+" />
                                 <Button fx:id="btCamadaRemove" mnemonicParsing="false" onAction="#btCamadaRemoveAction" text="-" />
                                 <Button fx:id="btLimparCamada" mnemonicParsing="false" onAction="#btLimparCamadaAction" text="Limpar" />

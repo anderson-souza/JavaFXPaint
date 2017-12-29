@@ -1,6 +1,5 @@
 package br.com.javafxpaint.pinceis;
 
-import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -23,9 +22,7 @@ public class Borracha extends Pincel {
     public void desenhar(GraphicsContext gc, double x1, double y1, double x2, double y2) {
         final double espessura = tamanhoPincelAtual;
         final double centro = Math.round(espessura / 2);
-        Platform.runLater(() -> {
-            gc.clearRect(x1 - centro, y1 - centro, espessura, espessura);
-        });
+        gc.clearRect(x1 - centro, y1 - centro, espessura, espessura);
     }
 
     @Override
